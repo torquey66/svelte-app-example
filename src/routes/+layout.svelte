@@ -1,6 +1,8 @@
 <script>
   import "../app.css";
+  import { Footer } from 'flowbite-svelte';
   import { Navbar, NavBrand, NavLi, NavUl, NavHamburger } from 'flowbite-svelte';
+  import Status from '../components/Status.svelte';
 </script>
 
 <Navbar>
@@ -15,6 +17,10 @@
 </Navbar>
 
 <slot/>
+
+<Footer>
+  <Status/>
+</Footer>
 
 <style lang="postcss">
   :global(html) {
