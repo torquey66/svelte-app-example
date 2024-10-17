@@ -12,8 +12,8 @@
     </NavBrand>
     <NavHamburger/>
     <NavUl >
-      <NavLi href="/">About</NavLi>
-      <NavLi href="/refdata">Ref Data</NavLi>
+      <NavLi href="/assets">Assets</NavLi>
+      <NavLi href="/pairs">Pairs</NavLi>
     </NavUl>
   </Navbar>
 
