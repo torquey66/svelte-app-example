@@ -1,33 +1,41 @@
 <script>
   import "../app.css";
-  import { BottomNav, BottomNavItem, Skeleton, ImagePlaceholder, TextPlaceholder } from 'flowbite-svelte';
-  import { Navbar, NavBrand, NavLi, NavUl, NavHamburger } from 'flowbite-svelte';
+  import { BottomNav, BottomNavItem } from 'flowbite-svelte';
   import Status from '../components/Status.svelte';
+
+  import { page } from '$app/stores';
+  $: currentPath = $page.url.pathname;
+
 </script>
 
 <div>
-  <Navbar>
-    <NavBrand href="/">
-      <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Kraken Explorer</span>
-    </NavBrand>
-    <NavHamburger/>
-    <NavUl >
-      <NavLi href="/assets">Assets</NavLi>
-      <NavLi href="/pairs">Pairs</NavLi>
-    </NavUl>
-  </Navbar>
-
-  <div class="max-h-screen overflow-hidden flex flex-col">
-    <div class="flex-grow overflow-auto">
-      <slot/>
+  <div>
+    <div class="border-b border-gray-300">
+      <div class="flex space-x-4">
+        <a
+          href="/assets"
+          class={`px-8 py-8 font-bold transition-colors duration-200 rounded-t-lg
+                 ${currentPath === '/assets' ? 'text-blue-600 bg-white shadow' : 'text-gray-500 hover:text-red-600'}`}
+          >
+          Assets
+        </a>
+        <a
+          href="/pairs"
+          class={`px-8 py-8 font-bold transition-colors duration-200 rounded-t-lg
+          ${currentPath === '/pairs' ? 'text-blue-600 bg-white shadow' : 'text-gray-500 hover:text-red-600'}`}
+          >
+          Pairs
+        </a>
+      </div>
     </div>
+    <slot />
   </div>
 
-<BottomNav>
-  <BottomNavItem>
-    <Status/>
-  </BottomNavItem>
-</BottomNav>
+  <BottomNav>
+    <BottomNavItem>
+      <Status/>
+    </BottomNavItem>
+  </BottomNav>
 </div>
 
 <style lang="postcss">
