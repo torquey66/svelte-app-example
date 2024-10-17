@@ -1,4 +1,4 @@
 <h1 class="text-3xl font-bold underline">
-  Main page
+  Ref Data placeholder
 </h1>
 
