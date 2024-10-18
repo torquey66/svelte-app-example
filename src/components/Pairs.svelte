@@ -24,12 +24,7 @@
   let selectedRow = null;
   let isDrawerHidden = true;
 
-  function handleRowClick(row) {
-    selectedRow = row;
-    isDrawerHidden = false;
-  }
-
-  function closeModal() {
+  function closeDrawer() {
     selectedRow = null;
     isDrawerHidden = true;
   }
@@ -39,6 +34,29 @@
     duration: 200,
     easing: sineIn
   };
+
+  let ohlc = {};
+  async function getOHLC() {
+    const symbol = encodeURIComponent(selectedRow.symbol);
+    const url = '/api/ohlc?symbol=' + symbol;
+    const response = await fetch(url);
+    if (response.ok) {
+      const content = await response.json();
+      const tickData = content.tickData;
+      const latestTick = tickData.at(-1);
+      const [time, open, high, low, close, vwap, volume, count] = latestTick;
+      ohlc = { time, open, high, low, close, vwap, volume, count };
+    }
+    else {
+      console.error('Error fetching OHLC:', response.status);
+    }
+  }
+
+  function handleRowClick(row) {
+    selectedRow = row;
+    isDrawerHidden = false;
+    getOHLC();
+  }
 
 </script>
 
@@ -67,6 +85,7 @@
         <InfoCircleSolid class="w-5 h-5 me-2.5" />
         {selectedRow['symbol']}
       </h5>
+      <p>{JSON.stringify(ohlc)}</p>
     </div>
   </Drawer>
   
