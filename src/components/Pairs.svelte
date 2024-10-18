@@ -1,9 +1,17 @@
 <script>
-  import { Modal } from 'flowbite-svelte';
-  import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
+  import { Drawer, Table, TableBody, TableBodyCell, TableBodyRow, TableHead,
+           TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
+  import { sineIn } from 'svelte/easing';
+  import { InfoCircleSolid } from 'flowbite-svelte-icons';
+
   export let data;
 
-  const cols = ['symbol', 'altname', 'wsname', 'aclass_base', 'base', 'aclass_quote', 'quote', 'lot', 'pair_decimals', 'cost_decimals', 'lot_decimals', 'lot_multiplier', 'leverage_buy', 'leverage_sell', 'fees', 'fees_maker', 'fee_volume_currency', 'margin_call', 'margin_stop', 'ordermin', 'costmin', 'tick_size', 'status', 'long_position_limit','short_position_limit'];
+  const cols = [
+    'symbol', 'altname', 'wsname', 'aclass_base', 'base', 'aclass_quote', 'quote',
+    'lot', 'pair_decimals', 'cost_decimals', 'lot_decimals', 'lot_multiplier',
+    'leverage_buy', 'leverage_sell', 'margin_call', 'margin_stop', 'ordermin', 'costmin',
+    'tick_size', 'status', 'long_position_limit','short_position_limit',
+    'fees', 'fees_maker', 'fee_volume_currency'];
 
   $: symbols = Object.keys(data.result);
   $: rows = symbols.map(key => {
@@ -13,18 +21,24 @@
     };
   });
 
-  let isModalOpen = false;
   let selectedRow = null;
+  let isDrawerHidden = true;
 
   function handleRowClick(row) {
     selectedRow = row;
-    isModalOpen = true;
+    isDrawerHidden = false;
   }
 
   function closeModal() {
-    isModalOpen = false;
     selectedRow = null;
+    isDrawerHidden = true;
   }
+
+  let transitionParams = {
+    x: 320,
+    duration: 200,
+    easing: sineIn
+  };
 
 </script>
 
@@ -47,10 +61,14 @@
     </TableBody>
   </Table>
 
-  {#if isModalOpen}
-    <Modal title={selectedRow['symbol']} bind:open={isModalOpen} on:close={closeModal} autoclose outsideclose>
-      <p>{JSON.stringify(selectedRow)}</p>
-    </Modal>
-  {/if}
+  <Drawer placement="right" transitiontype="fly" {transitionParams} bind:hidden={isDrawerHidden}>
+    <div class="flex items-center">
+      <h5 id="drawer-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+        <InfoCircleSolid class="w-5 h-5 me-2.5" />
+        {selectedRow['symbol']}
+      </h5>
+    </div>
+  </Drawer>
+  
 </div>
 
