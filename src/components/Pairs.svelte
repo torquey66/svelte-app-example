@@ -1,4 +1,5 @@
 <script>
+  import { Modal } from 'flowbite-svelte';
   import { Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
   export let data;
 
@@ -12,6 +13,18 @@
     };
   });
 
+  let isModalOpen = false;
+  let selectedRow = null;
+
+  function handleRowClick(row) {
+    selectedRow = row;
+    isModalOpen = true;
+  }
+
+  function closeModal() {
+    isModalOpen = false;
+    selectedRow = null;
+  }
 
 </script>
 
@@ -25,7 +38,7 @@
 
     <TableBody>
       {#each rows as row}
-        <TableBodyRow>
+        <TableBodyRow on:click={() => handleRowClick(row)}>
           {#each cols as col}
             <TableBodyCell class="p-2 border-b">{row[col]}</TableBodyCell>
           {/each}
@@ -33,5 +46,11 @@
       {/each}
     </TableBody>
   </Table>
+
+  {#if isModalOpen}
+    <Modal title={selectedRow['symbol']} bind:open={isModalOpen} on:close={closeModal} autoclose outsideclose>
+      <p>{JSON.stringify(selectedRow)}</p>
+    </Modal>
+  {/if}
 </div>
 
