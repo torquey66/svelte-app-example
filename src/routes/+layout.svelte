@@ -15,24 +15,26 @@
 <div>
   <Tabs tabStyle="pill">
     <TabItem open>
-      <span slot="title">Assets</span>
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-         <Assets data={data.assets}/>
-      </p>
-    </TabItem>
-    <TabItem>
       <span slot="title">Pairs</span>
       <p class="text-sm text-gray-500 dark:text-gray-400">
          <Pairs data={data.pairs}/>
       </p>
     </TabItem>
+    <TabItem>
+      <span slot="title">Assets</span>
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+         <Assets data={data.assets}/>
+      </p>
+    </TabItem>
   </Tabs>
 
   <BottomNav  class="bg-gray-800 text-white">
+    <span>
     <BottomNavItem class="flex items-center space-x-2 hover:bg-gray-700 p-2 rounded">Kraken Explorer</BottomNavItem>
     <BottomNavItem class="flex items-center space-x-2 hover:bg-gray-700 p-2 rounded">
       <Status/>
     </BottomNavItem>
+    </span>
   </BottomNav>
 </div>
 
