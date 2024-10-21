@@ -40,37 +40,37 @@
 <div>
   <h2>OHLC</h2>
   {#if isLoading}
-    <p>Loading status...</p>
+    <p>Loading OHLC...</p>
   {:else if ohlc}
     <Table>
       <TableBody>
         <TableBodyRow>
-        <TableBodyCell>Open</TableBodyCell>
-        <TableBodyCell>{ohlc.open}</TableBodyCell>
+          <TableBodyCell>Open</TableBodyCell>
+          <TableBodyCell>{ohlc.open}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
-        <TableBodyCell>High</TableBodyCell>
-        <TableBodyCell>{ohlc.high}</TableBodyCell>
+          <TableBodyCell>High</TableBodyCell>
+          <TableBodyCell>{ohlc.high}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
-        <TableBodyCell>Low</TableBodyCell>
-        <TableBodyCell>{ohlc.low}</TableBodyCell>
+          <TableBodyCell>Low</TableBodyCell>
+          <TableBodyCell>{ohlc.low}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
-        <TableBodyCell>Close</TableBodyCell>
-        <TableBodyCell>{ohlc.close}</TableBodyCell>
+          <TableBodyCell>Close</TableBodyCell>
+          <TableBodyCell>{ohlc.close}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
-        <TableBodyCell>VWAP</TableBodyCell>
-        <TableBodyCell>{ohlc.vwap}</TableBodyCell>
+          <TableBodyCell>VWAP</TableBodyCell>
+          <TableBodyCell>{ohlc.vwap}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
-        <TableBodyCell>Volume</TableBodyCell>
-        <TableBodyCell>{ohlc.volume}</TableBodyCell>
+          <TableBodyCell>Volume</TableBodyCell>
+          <TableBodyCell>{ohlc.volume}</TableBodyCell>
         </TableBodyRow>
         <TableBodyRow>
-        <TableBodyCell>Time</TableBodyCell>
-        <TableBodyCell>{ohlc.time}</TableBodyCell>
+          <TableBodyCell>Time</TableBodyCell>
+          <TableBodyCell>{ohlc.time}</TableBodyCell>
         </TableBodyRow>
       </TableBody>
     </Table>

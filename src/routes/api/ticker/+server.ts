@@ -1,7 +1,7 @@
 export async function GET( { url } ) {
 
     const symbol = url.searchParams.get('symbol') ?? '';
-    const serverURL = 'https://api.kraken.com/0/public/OHLC?pair=' + symbol;
+    const serverURL = 'https://api.kraken.com/0/public/Ticker?pair=' + symbol;
     const empty = {};
 
     try {
@@ -11,11 +11,17 @@ export async function GET( { url } ) {
         });
         if (serverResponse.ok) {
             const content = await serverResponse.json();
-            const last = content.result['last'];
-            const tickData = content.result[symbol];
+            const ticker = content.result[symbol];
             const result = {
-                'last' : last,
-                'tickData' : tickData
+                "ask": ticker.a,
+                "bid": ticker.b,
+                "close": ticker.c,
+                "volume": ticker.v,
+                "vwap": ticker.p,
+                "num_trades": ticker.t,
+                "low": ticker.l,
+                "high": ticker.h,
+                "open": ticker.o,
             };
             const response = new Response(JSON.stringify(result), {
                 status: 200,

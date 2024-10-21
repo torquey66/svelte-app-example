@@ -4,6 +4,7 @@
   import { sineIn } from 'svelte/easing';
   import { InfoCircleSolid } from 'flowbite-svelte-icons';
   import OHLC from './OHLC.svelte';
+  import Ticker from './Ticker.svelte';
 
   export let data;
 
@@ -31,32 +32,14 @@
   }
 
   let transitionParams = {
-    x: 320,
+    x: 420,
     duration: 200,
     easing: sineIn
   };
 
-  let ohlc = {};
-  async function getOHLC() {
-    const symbol = encodeURIComponent(selectedRow.symbol);
-    const url = '/api/ohlc?symbol=' + symbol;
-    const response = await fetch(url);
-    if (response.ok) {
-      const content = await response.json();
-      const tickData = content.tickData;
-      const latestTick = tickData.at(-1);
-      const [time, open, high, low, close, vwap, volume, count] = latestTick;
-      ohlc = { time, open, high, low, close, vwap, volume, count };
-    }
-    else {
-      console.error('Error fetching OHLC:', response.status);
-    }
-  }
-
   function handleRowClick(row) {
     selectedRow = row;
     isDrawerHidden = false;
-    getOHLC();
   }
 
 </script>
@@ -82,6 +65,7 @@
 
   <Drawer placement="right" transitiontype="fly" {transitionParams} bind:hidden={isDrawerHidden}>
       <h1>{selectedRow.symbol}</h1>
+      <Ticker data={selectedRow.symbol}/>
       <OHLC data={selectedRow.symbol}/>
   </Drawer>
   
