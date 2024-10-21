@@ -4,7 +4,7 @@
 
   let name = '';
   let status = '';
-  let isLoading = false;
+  let isLoading = true;
 
   async function fetchData() {
     try {

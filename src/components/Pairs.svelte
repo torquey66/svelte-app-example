@@ -3,6 +3,7 @@
            TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
   import { sineIn } from 'svelte/easing';
   import { InfoCircleSolid } from 'flowbite-svelte-icons';
+  import OHLC from './OHLC.svelte';
 
   export let data;
 
@@ -80,13 +81,8 @@
   </Table>
 
   <Drawer placement="right" transitiontype="fly" {transitionParams} bind:hidden={isDrawerHidden}>
-    <div class="flex items-center">
-      <h5 id="drawer-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
-        <InfoCircleSolid class="w-5 h-5 me-2.5" />
-        {selectedRow['symbol']}
-      </h5>
-      <p>{JSON.stringify(ohlc)}</p>
-    </div>
+      <h1>{selectedRow.symbol}</h1>
+      <OHLC data={selectedRow.symbol}/>
   </Drawer>
   
 </div>
